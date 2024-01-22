@@ -1,0 +1,24 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: service-product
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: "wy981116"
+  jpa:
+    database: MySQL
+    show-sql: true
+    open-in-view: true
+  #配置Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/ #多个eurekaserver之间用,隔开
+  instance:
+    prefer-ip-address: true #使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5 #发送心跳的间隔
+    lease-expiration-duration-in-seconds: 10 #续约到期时间
